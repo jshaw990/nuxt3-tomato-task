@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
     "@nuxtjs/device": "^3.1.1",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
@@ -21,6 +20,7 @@
     "naive-ui": "^2.35.0",
     "nuxt": "^3.7.4",
     "nuxt-icon": "^0.5.0",
+    "sass": "^1.69.3",
     "vfonts": "^0.0.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"

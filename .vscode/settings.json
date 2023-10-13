@@ -1,5 +1,7 @@
 {
     "editor.formatOnSave": true,
     "editor.wordWrapColumn": 120,
-    "editor.wordWrap": "wordWrapColumn"
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
 }
