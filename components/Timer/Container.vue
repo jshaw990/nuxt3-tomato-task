@@ -72,36 +72,36 @@ const toggleTimerState = () => {
 
 <template>
     <div class="flex flex-col items-center gap-8">
-        <NProgress :height="300" :processing="state.isRunning" type="line" :percentage="determinePercentageOfTimer"
+        <n-progress :height="300" :processing="state.isRunning" type="line" :percentage="determinePercentageOfTimer"
             style="width: 300px !important;">
             <div class="text-center">
                 <div class="-mt-8 pb-4 text-4xl">{{ secondsToMinutesAndSeconds }}</div>
-                <NButtonGroup>
-                    <NButton round ghost class="w-[120px]" @click="toggleTimerState">
+                <n-button-group>
+                    <n-button round ghost class="w-[120px]" @click="toggleTimerState">
                         {{ state.isRunning ? 'Stop timer' : 'Start timer' }}
-                    </NButton>
-                    <NButton round ghost class="w-[120px]" @click="resetTimer">
+                    </n-button>
+                    <n-button round ghost class="w-[120px]" @click="resetTimer">
                         Reset timer
-                    </NButton>
-                </NButtonGroup>
+                    </n-button>
+                </n-button-group>
             </div>
-        </NProgress>
-        <NButtonGroup>
-            <NButton round ghost class="w-[150px]">
+        </n-progress>
+        <n-button-group>
+            <n-button round ghost class="w-[150px]">
                 <template #icon>
                     <Icon name="ph:coffee-bold" />
                 </template>
                 Long break
-            </NButton>
-            <NButton round ghost class="w-[70px] md:w-[150px]">
+            </n-button>
+            <n-button round ghost class="w-[70px] md:w-[150px]">
                 Work
-            </NButton>
-            <NButton round ghost class="w-[150px]" icon-placement="right">
+            </n-button>
+            <n-button round ghost class="w-[150px]" icon-placement="right">
                 Short break
                 <template #icon>
                     <Icon name="ph:coffee-bold" />
                 </template>
-            </NButton>
-        </NButtonGroup>
+            </n-button>
+        </n-button-group>
     </div>
 </template>

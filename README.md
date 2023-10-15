@@ -2,6 +2,10 @@
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+## Deployed to Netlify!
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/36c1ca16-5603-4f11-b961-3d93b26e362e/deploy-status)](https://app.netlify.com/sites/tomato-task/deploys)
+
 ## Setup
 
 Make sure to install the dependencies:
