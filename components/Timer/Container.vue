@@ -5,6 +5,8 @@ import { useTomatoStore } from '@/store/tomatoStore'
 
 const store = useTomatoStore()
 
+const timerState = store.timerState
+
 const state = reactive({
     currentTimeInSeconds: 600,
     isProcessing: false,
@@ -71,6 +73,7 @@ const toggleTimerState = () => {
     if (state.isRunning) activateTimer()
     if (!state.isRunning) state.currentTimeInSeconds = timeAtToggle
     logTimerToStorage()
+    store.toggleIsRunning()
     state.isProcessing = false
 }
 
