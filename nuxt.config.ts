@@ -21,7 +21,8 @@ export default defineNuxtConfig({
         '@nuxtjs/device',
         '@nuxtjs/eslint-module',
         '@nuxtjs/tailwindcss',
-        'nuxt-icon'
+        'nuxt-icon',
+        '@nuxt/image'
     ],
     eslint: {
         fix: true
@@ -31,21 +32,11 @@ export default defineNuxtConfig({
     },
     build: {
         transpile:
-            process.env.NODE_ENV === 'production'
-                ? [
-                    'naive-ui',
-                    'vueuc',
-                    '@css-render/vue3-ssr',
-                    '@juggle/resize-observer'
-                ]
-                : ['@juggle/resize-observer']
+            process.env.NODE_ENV === 'production' ? ['naive-ui'] : []
     },
     vite: {
         optimizeDeps: {
-            include:
-                process.env.NODE_ENV === 'development'
-                    ? ['naive-ui']
-                    : []
+            include: process.env.NODE_ENV === 'development' ? ['naive-ui'] : []
         }
     }
 })

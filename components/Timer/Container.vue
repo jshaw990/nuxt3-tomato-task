@@ -68,6 +68,10 @@ const toggleTimerState = () => {
     logTimerToStorage()
     state.isProcessing = false
 }
+
+useSeoMeta({
+    title: () => { return `${secondsToMinutesAndSeconds.value} | Tomato Task` }
+})
 </script>
 
 <template>
