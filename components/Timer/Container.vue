@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
 import { NButton, NButtonGroup, NProgress } from 'naive-ui'
+import { useTomatoStore } from '@/store/tomatoStore'
+
+const store = useTomatoStore()
 
 const state = reactive({
     currentTimeInSeconds: 600,
@@ -30,6 +33,8 @@ const activateTimer = () => {
 
 const logTimerToStorage = () => {
     const log = state
+
+    store.setCurrentTimeInSeconds(state.currentTimeInSeconds)
 
     console.log(log)
 }
