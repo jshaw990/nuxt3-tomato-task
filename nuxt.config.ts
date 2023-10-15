@@ -21,9 +21,15 @@ export default defineNuxtConfig({
         '@nuxtjs/device',
         '@nuxtjs/eslint-module',
         '@nuxtjs/tailwindcss',
-        'nuxt-icon',
-        '@nuxt/image'
+        '@nuxt/image',
+        '@pinia/nuxt',
+        'nuxt-icon'
     ],
+    runtimeConfig: {
+        public: {
+            currentEnv: process.env.NODE_ENV
+        }
+    },
     eslint: {
         fix: true
     },
