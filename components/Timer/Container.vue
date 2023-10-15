@@ -72,7 +72,7 @@ const toggleTimerState = () => {
 
 <template>
     <div class="flex flex-col items-center gap-8">
-        <n-progress :height="300" :processing="state.isRunning" type="line" :percentage="determinePercentageOfTimer"
+        <n-progress :height="300" :processing="state.isRunning" type="circle" :percentage="determinePercentageOfTimer"
             style="width: 300px !important;">
             <div class="text-center">
                 <div class="-mt-8 pb-4 text-4xl">{{ secondsToMinutesAndSeconds }}</div>
