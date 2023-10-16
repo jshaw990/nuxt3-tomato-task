@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { LayoutKey } from '#build/types/layouts'
+import { useRuntimeConfig } from 'nuxt/app'
+import { computed } from 'vue'
 
 const { public: { currentEnv } } = useRuntimeConfig()
 
-const layoutName: LayoutKey = currentEnv === 'development' ? 'default' : 'construction'
+const layoutName = computed((): LayoutKey => {
+    return currentEnv === 'development' ? 'default' : 'construction'
+})
 </script>
 
 <template>
