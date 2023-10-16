@@ -5,13 +5,10 @@ import { useTomatoStore } from '@/store/tomatoStore'
 
 const store = useTomatoStore()
 
-const timerState = store.timerState
-
 const state = reactive({
-    currentTimeInSeconds: 600,
+    currentTimeInSeconds: store.getStartingOptionTime,
     isProcessing: false,
-    isRunning: false,
-    startTimeInSeconds: 600
+    isRunning: false
 })
 
 const activateTimer = () => {
@@ -53,7 +50,7 @@ const secondsToMinutesAndSeconds = computed((): string => {
 })
 
 const determinePercentageOfTimer = computed(() => {
-    return (state.currentTimeInSeconds / state.startTimeInSeconds) * 100
+    return (state.currentTimeInSeconds / store.getStartingOptionTime) * 100
 })
 
 const resetTimer = () => {
@@ -61,7 +58,7 @@ const resetTimer = () => {
 
     state.isProcessing = true
     state.isRunning = false
-    state.currentTimeInSeconds = state.startTimeInSeconds
+    state.currentTimeInSeconds = store.getStartingOptionTime
     logTimerToStorage()
     state.isProcessing = false
 }
@@ -98,22 +95,6 @@ useSeoMeta({
                 </n-button-group>
             </div>
         </n-progress>
-        <n-button-group>
-            <n-button round ghost class="w-[150px]">
-                <template #icon>
-                    <Icon name="ph:coffee-bold" />
-                </template>
-                Long break
-            </n-button>
-            <n-button round ghost class="w-[70px] md:w-[150px]">
-                Work
-            </n-button>
-            <n-button round ghost class="w-[150px]" icon-placement="right">
-                Short break
-                <template #icon>
-                    <Icon name="ph:coffee-bold" />
-                </template>
-            </n-button>
-        </n-button-group>
+        <TimerOptionRow />
     </div>
 </template>

@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "format": "eslint .",
-    "formatfix": "eslint . --fix"
+    "formatfix": "eslint . --fix",
+    "clean": "npx nuxi cleanup && rm -rf .netlify"
   },
   "devDependencies": {
     "@css-render/vue3-ssr": "^0.15.12",
