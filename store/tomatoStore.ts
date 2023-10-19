@@ -9,8 +9,8 @@ export const useTomatoStore = defineStore('tomato', () => {
     ////
 
     const timerState = ref({
-        currentTimeInSeconds: timerOptions[0].time,
-        currentTimerOptionIndex: 0,
+        currentTimeInSeconds: timerOptions[1].time,
+        currentTimerOptionIndex: 1,
         isReset: false,
         isRunning: false,
         timerOptions: timerOptions,
