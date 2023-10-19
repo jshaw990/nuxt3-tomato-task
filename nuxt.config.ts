@@ -25,6 +25,9 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         'nuxt-icon'
     ],
+    image: {
+        provider: 'netlify'
+    },
     runtimeConfig: {
         public: {
             currentEnv: process.env.NODE_ENV
