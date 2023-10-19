@@ -2,7 +2,6 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { timerOptions } from '~/assets/timerTypes'
-import { TimerOption } from '~/models/Timer'
 
 export const useTomatoStore = defineStore('tomato', () => {
     ////
@@ -12,6 +11,7 @@ export const useTomatoStore = defineStore('tomato', () => {
     const timerState = ref({
         currentTimeInSeconds: 0,
         currentTimerOptionIndex: 0,
+        isReset: false,
         isRunning: false,
         timerOptions: timerOptions,
     })
@@ -32,16 +32,39 @@ export const useTomatoStore = defineStore('tomato', () => {
         return timerState.value.timerOptions[timerState.value.currentTimerOptionIndex].time
     })
 
+    const secondsToMinutesAndSeconds = computed((): string | void => {
+        const seconds = timerState.value.currentTimeInSeconds
+        const minutes: number = Math.floor(seconds / 60)  // Get the whole number of minutes
+        const remainingSeconds: number = seconds % 60    // Get the remaining seconds
+
+        // Format the result as "minutes:seconds"
+        const timeFormat: string = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`
+
+        return timeFormat
+    })
+
     ////
     // SETTERS
     ////
+
+    const setTimerStateToDefault = () => {
+        timerState.value.isReset = true
+        timerState.value.currentTimeInSeconds = getStartingOptionTime.value
+    }
 
     const setCurrentTimeInSeconds = (seconds: number) => {
         timerState.value.currentTimeInSeconds = seconds
     }
 
-    const setcurrentTimerOptionIndex = (index: number) => {
+    const setCurrentTimerOptionIndex = (index: number) => {
+        timerState.value.isRunning = false
         timerState.value.currentTimerOptionIndex = index
+        timerState.value.isReset = true
+        setTimerStateToDefault()
+    }
+
+    const setIsRunning = (value: boolean) => {
+        timerState.value.isRunning = value
     }
 
     const setTimerOptions = (options: Array<any>) => {
@@ -50,15 +73,19 @@ export const useTomatoStore = defineStore('tomato', () => {
 
     const toggleIsRunning = () => {
         timerState.value.isRunning = !timerState.value.isRunning
+        timerState.value.isReset = timerState.value.isRunning ? false : timerState.value.isReset
     }
 
     return {
         getStartingOptionTime,
         getTimerOptions,
         getTimerState,
+        secondsToMinutesAndSeconds,
         setCurrentTimeInSeconds,
-        setcurrentTimerOptionIndex,
+        setCurrentTimerOptionIndex,
+        setIsRunning,
         setTimerOptions,
+        setTimerStateToDefault,
         timerState,
         toggleIsRunning
     }

@@ -2,11 +2,10 @@
 import { NButton, NButtonGroup } from 'naive-ui'
 import { useTomatoStore } from '@/store/tomatoStore'
 
-const { getTimerOptions, setcurrentTimerOptionIndex } = useTomatoStore()
+const { getTimerOptions, setCurrentTimerOptionIndex } = useTomatoStore()
 
 const handleUpdateTimerOption = (index: number) => {
-    console.log(index)
-    setcurrentTimerOptionIndex(index)
+    setCurrentTimerOptionIndex(index)
 }
 
 </script>
