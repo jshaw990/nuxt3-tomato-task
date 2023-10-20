@@ -10,18 +10,20 @@ const state = store.getTimerState
 const isProcessing = ref(false)
 
 const activateTimer = () => {
-    console.log(`Timer is toggled ${state.isRunning} at ${Date.now()}`)
-
-    const timerInterval = setInterval(() => {
-        if (state.currentTimeInSeconds >= 1 && state.isRunning) {
+    console.log(`Timer is toggled ${!state.isRunning} at ${Date.now()}`)
+    setTimeout(() => {
+        if (state.currentTimeInSeconds > 0 && state.isRunning) {
             store.setCurrentTimeInSeconds(state.currentTimeInSeconds - 1)
-        } else {
-            console.log(`Timer is at 0 at ${Date.now()}`)
-            clearInterval(timerInterval) // Stop the timer
-            store.setIsRunning(false)
-            store.setCurrentTimeInSeconds(0)
+
+            if (state.currentTimeInSeconds === 0 || !state.isRunning) {
+                console.log(`Timer is at 0 at ${Date.now()}`)
+                store.setIsRunning(false)
+                return
+            }
+
+            activateTimer()
         }
-    }, 993)
+    }, 1000)
 }
 
 const determinePercentageOfTimer = computed(() => {
@@ -51,15 +53,17 @@ useSeoMeta({ title: 'Tomato Task' })
 
 <template>
     <div class="flex flex-col items-center gap-8">
-        <n-progress :height="300" :processing="state.isRunning" type="circle" :percentage="determinePercentageOfTimer"
-            style="width: 300px !important;">
+        <n-progress :height="300" :processing="state.isRunning" color="#F44336" type="circle"
+            :percentage="determinePercentageOfTimer" style="width: 300px !important;">
             <div class="text-center">
                 <div class="-mt-8 pb-4 text-4xl">{{ store.secondsToMinutesAndSeconds }}</div>
                 <n-button-group>
-                    <n-button round ghost class="w-[120px]" @click="toggleTimerState">
+                    <n-button color="#F44336" round class="w-[120px] box-border" text-color="#f44336"
+                        style="border: 1px solid #f44336;" @click="toggleTimerState">
                         {{ state.isRunning ? 'Stop timer' : 'Start timer' }}
                     </n-button>
-                    <n-button round ghost class="w-[120px]" @click="resetTimer">
+                    <n-button color="#F44336" round class="w-[120px] box-border" text-color="#f44336" @click="resetTimer"
+                        style="border: 1px solid #f44336;">
                         Reset timer
                     </n-button>
                 </n-button-group>
