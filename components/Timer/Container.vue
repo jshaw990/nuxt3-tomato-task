@@ -10,18 +10,18 @@ const state = store.getTimerState
 const isProcessing = ref(false)
 
 const activateTimer = () => {
-    setTimeout(() => {
-        if (state.currentTimeInSeconds > 0 && state.isRunning) {
+    console.log(`Timer is toggled ${state.isRunning} at ${Date.now()}`)
+
+    const timerInterval = setInterval(() => {
+        if (state.currentTimeInSeconds >= 1 && state.isRunning) {
             store.setCurrentTimeInSeconds(state.currentTimeInSeconds - 1)
-
-            if (state.currentTimeInSeconds === 0 || !state.isRunning) {
-                store.setIsRunning(false)
-                return
-            }
-
-            activateTimer()
+        } else {
+            console.log(`Timer is at 0 at ${Date.now()}`)
+            clearInterval(timerInterval) // Stop the timer
+            store.setIsRunning(false)
+            store.setCurrentTimeInSeconds(0)
         }
-    }, 1000)
+    }, 993)
 }
 
 const determinePercentageOfTimer = computed(() => {
@@ -46,9 +46,7 @@ const toggleTimerState = () => {
     isProcessing.value = false
 }
 
-useSeoMeta({
-    title: () => { return `${store.secondsToMinutesAndSeconds} | Tomato Task` }
-})
+useSeoMeta({ title: 'Tomato Task' })
 </script>
 
 <template>

@@ -14,6 +14,7 @@ export const useTomatoStore = defineStore('tomato', () => {
         isReset: false,
         isRunning: false,
         timerOptions: timerOptions,
+        timerStats: []
     })
 
     ////

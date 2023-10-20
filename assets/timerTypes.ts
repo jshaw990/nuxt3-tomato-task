@@ -18,5 +18,11 @@ export const timerOptions = [
         name: 'Short Break',
         time: 300,
         icon: 'ph:coffee-bold'
-    }
+    },
+    // {
+    //     index: 3,
+    //     name: 'Test (60)',
+    //     time: 60,
+    //     icon: 'ph:coffee-bold'
+    // }
 ] as Array<TimerOption>
