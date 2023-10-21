@@ -13,6 +13,7 @@ export const useTomatoStore = defineStore('tomato', () => {
         currentTimerOptionIndex: 1,
         isReset: false,
         isRunning: false,
+        taskList: [] as Array<any>,
         timerOptions: timerOptions,
         timerStats: []
     })
@@ -20,6 +21,10 @@ export const useTomatoStore = defineStore('tomato', () => {
     ////
     // GETTERS
     ////
+
+    const getTaskList = computed(() => {
+        return timerState.value.taskList
+    })
 
     const getTimerOptions = computed(() => {
         return timerState.value.timerOptions
@@ -77,14 +82,22 @@ export const useTomatoStore = defineStore('tomato', () => {
         timerState.value.isReset = timerState.value.isRunning ? false : timerState.value.isReset
     }
 
+    const addNewItemToTaskList = (item: any) => {
+        if (item === null || item === undefined) return
+        timerState.value.taskList.push(item)
+        return true
+    }
+
     return {
         getStartingOptionTime,
+        getTaskList,
         getTimerOptions,
         getTimerState,
         secondsToMinutesAndSeconds,
         setCurrentTimeInSeconds,
         setCurrentTimerOptionIndex,
         setIsRunning,
+        addNewItemToTaskList,
         setTimerOptions,
         setTimerStateToDefault,
         timerState,

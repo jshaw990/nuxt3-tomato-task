@@ -3,6 +3,9 @@
 
 <template>
     <NavPageLayout>
-        <TimerContainer />
+        <div class="flex flex-row justify-around">
+            <TimerContainer class="" />
+            <TaskContainer class="" />
+        </div>
     </NavPageLayout>
 </template>

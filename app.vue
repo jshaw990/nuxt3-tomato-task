@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { LayoutKey } from '#build/types/layouts'
+import { useHead, useCookie } from 'nuxt/app'
 // import { useRuntimeConfig } from 'nuxt/app'
 import { computed } from 'vue'
 
@@ -19,6 +20,16 @@ useHead({
         gtag('config', 'G-ME0NZ6S1CS');`
     ]
 })
+
+const userCookie = useCookie('user')
+
+console.log(userCookie.value)
+
+// userCookie.value = JSON.stringify({
+//     uuid: 'abc123',
+//     timer: false
+// })
+
 </script>
 
 <template>
