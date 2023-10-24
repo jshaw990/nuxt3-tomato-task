@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { timerOptions } from '~/assets/timerTypes'
+import { timerOptions } from '@/assets/timerTypes'
 
 export const useTomatoStore = defineStore('tomato', () => {
     ////
@@ -34,6 +34,10 @@ export const useTomatoStore = defineStore('tomato', () => {
         return timerState.value
     })
 
+    const getTimeInSeconds = computed(() => {
+        return timerState.value.currentTimeInSeconds
+    })
+
     const getStartingOptionTime = computed(() => {
         return timerState.value.timerOptions[timerState.value.currentTimerOptionIndex].time
     })
@@ -47,6 +51,12 @@ export const useTomatoStore = defineStore('tomato', () => {
         const timeFormat: string = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`
 
         return timeFormat
+    })
+
+    const getTimerPercentage = computed(() => {
+        return timerState.value.currentTimeInSeconds
+            / timerState.value.timerOptions[timerState.value.currentTimerOptionIndex].time
+            * 100
     })
 
     ////
@@ -107,6 +117,8 @@ export const useTomatoStore = defineStore('tomato', () => {
         setTimerStateToDefault,
         setStateValueFromStorage,
         timerState,
-        toggleIsRunning
+        toggleIsRunning,
+        getTimerPercentage,
+        getTimeInSeconds
     }
 })

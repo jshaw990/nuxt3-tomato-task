@@ -39,8 +39,8 @@ const taskData = ref({
             <n-input v-model:value="taskData.title" type="text" round placeholder="Add a new task" size="large" class="w-72"
                 :status="taskData.isInvalid ? 'error' : undefined" :class="taskData.isInvalid ? 'shake-y-short' : ''" />
             <n-button :type="taskData.isInvalid ? 'error' : 'default'" circle class="h-9 w-9"
-                :color="taskData.isInvalid ? '' : ''">
-                <Icon :name="'material-symbols:add-circle-outline'" size="20px" @click="addItemToTaskList" />
+                :color="taskData.isInvalid ? '' : ''" @click="addItemToTaskList">
+                <Icon :name="'material-symbols:add-circle-outline'" size="20px" />
             </n-button>
         </div>
     </div>

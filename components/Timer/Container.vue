@@ -70,5 +70,7 @@ useSeoMeta({ title: 'Tomato Task' })
             </div>
         </n-progress>
         <TimerOptionRow />
+        <TimerVertical :percentage="determinePercentageOfTimer" :isRunning="state.isRunning"
+            :timeDisplay="store.secondsToMinutesAndSeconds" />
     </div>
 </template>
