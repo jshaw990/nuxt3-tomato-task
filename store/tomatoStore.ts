@@ -88,6 +88,11 @@ export const useTomatoStore = defineStore('tomato', () => {
         return true
     }
 
+    const setStateValueFromStorage = (storedState: any) => {
+        timerState.value = storedState
+        console.log('set! => ', storedState)
+    }
+
     return {
         getStartingOptionTime,
         getTaskList,
@@ -100,6 +105,7 @@ export const useTomatoStore = defineStore('tomato', () => {
         addNewItemToTaskList,
         setTimerOptions,
         setTimerStateToDefault,
+        setStateValueFromStorage,
         timerState,
         toggleIsRunning
     }

@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useTomatoStore } from '~/store/tomatoStore'
-
 const { getTaskList } = useTomatoStore()
-
-
 </script>
 
 <template>

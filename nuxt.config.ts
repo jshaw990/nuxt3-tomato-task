@@ -28,6 +28,7 @@ export default defineNuxtConfig({
     image: {
         provider: 'netlify'
     },
+    // plugins: ['@/plugins/piniaStorage'],
     runtimeConfig: {
         public: {
             currentEnv: process.env.NODE_ENV
