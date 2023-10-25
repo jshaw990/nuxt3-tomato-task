@@ -1,13 +1,8 @@
-<script setup lang="ts">
-import { useTomatoStore } from '~/store/tomatoStore'
-const { getTaskList } = useTomatoStore()
-</script>
-
 <template>
-    <div class="flex flex-col items-center gap-4 w-80">
-        <TaskCreate />
-        <div v-for="task in getTaskList" :key="task.title">
-            {{ task.title }}
+    <div class="flex flex-col items-center gap-4 mx-auto">
+        <div class="w-full max-w-[270px] md:max-w-sm px-4 mx-auto">
+            <TaskCreate class="w-full" />
+            <TaskList class="w-full" />
         </div>
     </div>
 </template>

@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-    <main class="page-layout m-0 p-8 min-h-screen bg-stone-50">
+    <main class="page-layout m-0 py-8 px-4 md:px-8 min-h-screen bg-stone-50">
         <template v-if="isLoading">
             <div>Loading</div>
         </template>

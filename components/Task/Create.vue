@@ -17,10 +17,9 @@ const addItemToTaskList = () => {
 
     if (requestAdd) {
         taskData.value.title = ''
-        // return
+        return
     }
     taskData.value.isInvalid = true
-
     // setTimeout(() => { taskData.value.isInvalid = false }, 1000)
 }
 
@@ -28,12 +27,10 @@ const taskData = ref({
     isInvalid: false,
     title: ''
 })
-
-
 </script>
 
 <template>
-    <div class="flex flex-col justify-center p-4">
+    <div class="flex flex-col justify-center">
         <div class="mx-4 my-2">Create a new task</div>
         <div class="flex flex-row justify-between gap-4 items-center">
             <n-input v-model:value="taskData.title" type="text" round placeholder="Add a new task" size="large" class="w-72"

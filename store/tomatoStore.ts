@@ -22,6 +22,10 @@ export const useTomatoStore = defineStore('tomato', () => {
     // GETTERS
     ////
 
+    const getIsTimerRunning = computed(() => {
+        return timerState.value.isRunning
+    })
+
     const getTaskList = computed(() => {
         return timerState.value.taskList
     })
@@ -63,6 +67,29 @@ export const useTomatoStore = defineStore('tomato', () => {
     // SETTERS
     ////
 
+    const activateTimer = () => {
+        console.log(`Timer is toggled ${!timerState.value.isRunning} at ${Date.now()}`)
+        setTimeout(() => {
+            if (timerState.value.currentTimeInSeconds > 0 && timerState.value.isRunning) {
+                setCurrentTimeInSeconds(timerState.value.currentTimeInSeconds - 1)
+
+                if (timerState.value.currentTimeInSeconds === 0 || !timerState.value.isRunning) {
+                    console.log(`Timer is at 0 at ${Date.now()}`)
+                    setIsRunning(false)
+                    return
+                }
+
+                activateTimer()
+            }
+        }, 1000)
+    }
+
+    const resetTimer = () => {
+        timerState.value.isRunning = false
+        timerState.value.isReset = true
+        timerState.value.currentTimeInSeconds = getStartingOptionTime.value
+    }
+
     const setTimerStateToDefault = () => {
         timerState.value.isReset = true
         timerState.value.currentTimeInSeconds = getStartingOptionTime.value
@@ -81,6 +108,7 @@ export const useTomatoStore = defineStore('tomato', () => {
 
     const setIsRunning = (value: boolean) => {
         timerState.value.isRunning = value
+        if (timerState.value.isRunning) activateTimer()
     }
 
     const setTimerOptions = (options: Array<any>) => {
@@ -89,6 +117,7 @@ export const useTomatoStore = defineStore('tomato', () => {
 
     const toggleIsRunning = () => {
         timerState.value.isRunning = !timerState.value.isRunning
+        if (timerState.value.isRunning) activateTimer()
         timerState.value.isReset = timerState.value.isRunning ? false : timerState.value.isReset
     }
 
@@ -104,6 +133,7 @@ export const useTomatoStore = defineStore('tomato', () => {
     }
 
     return {
+        activateTimer,
         getStartingOptionTime,
         getTaskList,
         getTimerOptions,
@@ -119,6 +149,8 @@ export const useTomatoStore = defineStore('tomato', () => {
         timerState,
         toggleIsRunning,
         getTimerPercentage,
-        getTimeInSeconds
+        getTimeInSeconds,
+        resetTimer,
+        getIsTimerRunning
     }
 })
