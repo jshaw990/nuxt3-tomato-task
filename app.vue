@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { LayoutKey } from '#build/types/layouts'
 import { useHead, useCookie } from 'nuxt/app'
 // import { useRuntimeConfig } from 'nuxt/app'
 import { computed } from 'vue'

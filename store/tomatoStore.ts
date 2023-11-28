@@ -153,4 +153,6 @@ export const useTomatoStore = defineStore('tomato', () => {
         resetTimer,
         getIsTimerRunning
     }
+}, {
+    persist: true
 })

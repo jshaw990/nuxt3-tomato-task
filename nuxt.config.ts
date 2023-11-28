@@ -20,15 +20,23 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/device',
         '@nuxtjs/eslint-module',
+        '@nuxtjs/supabase',
         '@nuxtjs/tailwindcss',
         '@nuxt/image',
         '@pinia/nuxt',
-        'nuxt-icon'
+        '@pinia-plugin-persistedstate/nuxt',
+        'nuxt-icon',
     ],
     image: {
         provider: 'netlify'
     },
-    // plugins: ['@/plugins/piniaStorage'],
+    supabase: {
+        redirectOptions: {
+            login: '/login',
+            callback: '/confirm',
+            exclude: ['/', '/register']
+        }
+    },
     runtimeConfig: {
         public: {
             currentEnv: process.env.NODE_ENV
