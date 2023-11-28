@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const supabase = useSupabaseClient()
-
 const state = reactive({
-    errorMessages: [],
+    errorMessages: [] as Array<any>,
     formData: {
         email: '',
         name: '',
@@ -24,25 +22,13 @@ const handleLoginRequest = async () => {
 
     state.isProcessing = true
 
-    const { data, error } = await supabase.auth.signUp({
-        email: state.formData.email,
-        password: state.formData.password,
-        options: {
-            data: {
-                name: state.formData.name
-            }
-        }
-    })
+    const creationErrors = await createNewUser(state.formData)
 
-    debugger
-
-    console.log(data)
-
-    if (error) {
-        console.log(error)
-        state.errorMessages.push(error.message)
+    if (creationErrors.length === 0) {
+        return navigateTo('/')
     }
 
+    state.errorMessages.push(...creationErrors)
     state.isProcessing = false
 }
 </script>
@@ -53,8 +39,8 @@ const handleLoginRequest = async () => {
             @fieldBlurred="setFieldValue" />
         <FormInputField :fieldKey="'email'" :validationType="'email'" :fieldPlaceholder="'Email'" :fieldType="'email'"
             :prependIcon="'mdi:mail'" @fieldBlurred="setFieldValue" />
-        <FormInputField :fieldKey="'password'" :validationType="'password'" :fieldPlaceholder="'Passphrase'"
-            :fieldType="'password'" @fieldBlurred="setFieldValue" />
+        <FormInputField :fieldKey="'password'" :validationType="''" :fieldPlaceholder="'Passphrase'" :fieldType="'password'"
+            @fieldBlurred="setFieldValue" />
         <AppButton :buttonText="'Create an account'" :isLoading="state.isProcessing" @buttonPressed="handleLoginRequest" />
     </FormContainer>
 </template>

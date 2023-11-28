@@ -2,7 +2,7 @@
 const supabase = useSupabaseClient()
 
 const state = reactive({
-    errorMessages: [],
+    errorMessages: [] as Array<any>,
     formData: {
         email: '',
         password: ''
@@ -22,20 +22,16 @@ const handleLoginRequest = async () => {
     if (!state.isFormValidated || state.isProcessing) return
 
     state.isProcessing = true
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email: state.formData.email,
-        password: state.formData.password
-    })
-
     debugger
 
-    console.log(data)
+    const loginErrors = await loginUser(state.formData)
+    debugger
 
-    if (error) {
-        console.log(error)
-        state.errorMessages.push(error.message)
+    if (loginErrors.length === 0) {
+        return navigateTo('/')
     }
+
+    state.errorMessages.push(...loginErrors)
 
     state.isProcessing = false
 }
@@ -43,10 +39,10 @@ const handleLoginRequest = async () => {
 
 <template>
     <FormContainer :errorMessages="state.errorMessages" :title="'Login'">
-        <FormInputField :fieldKey="'email'" :validationType="'email'" :fieldPlaceholder="'Email'" :fieldType="'email'"
-            :prependIcon="'mdi:mail'" @fieldBlurred="setFieldValue" />
-        <FormInputField :fieldKey="'password'" :validationType="'password'" :fieldPlaceholder="'Passphrase'"
-            :fieldType="'password'" @fieldBlurred="setFieldValue" />
+        <FormInputField :fieldKey="'email'" :fieldPlaceholder="'Email'" :fieldType="'email'" :prependIcon="'mdi:mail'"
+            @fieldBlurred="setFieldValue" />
+        <FormInputField :fieldKey="'password'" :fieldPlaceholder="'Passphrase'" :fieldType="'password'"
+            @fieldBlurred="setFieldValue" />
         <AppButton :buttonText="'Login'" :isLoading="state.isProcessing" @buttonPressed="handleLoginRequest" />
     </FormContainer>
 </template>

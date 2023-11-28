@@ -20,15 +20,6 @@ useHead({
     ]
 })
 
-const userCookie = useCookie('user')
-
-console.log(userCookie.value)
-
-// userCookie.value = JSON.stringify({
-//     uuid: 'abc123',
-//     timer: false
-// })
-
 </script>
 
 <template>

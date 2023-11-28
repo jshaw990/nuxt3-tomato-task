@@ -14,7 +14,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="flex flex-col flex-nowrap items-center mx-auto justify-center gap-8">
+    <form class="flex flex-col flex-nowrap items-center mx-auto justify-center gap-8">
         <h6 v-if="props.title.length > 0" class="text-2xl tracking-widest">
             {{ props.title }}
         </h6>
@@ -25,5 +25,5 @@ const props = defineProps({
             </template>
         </div>
         <slot />
-    </div>
+    </form>
 </template>
