@@ -24,7 +24,8 @@ const getButtonStyles = computed(() => {
     return 'bg-neutral-800 hover:bg-tt-red-1 border-neutral-800 text-white border-2'
 })
 
-const handleButtonPressed = () => {
+const handleButtonPressed = (event) => {
+    event.preventDefault()
     if (props.isDisabled || props.isLoading) return
 
     emit('buttonPressed')

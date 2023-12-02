@@ -5,40 +5,43 @@ import { useTomatoStore } from '@/store/tomatoStore'
 
 const { addNewItemToTaskList } = useTomatoStore()
 
+const state = reactive({
+    isInvalid: false,
+    title: ''
+})
+
 const addItemToTaskList = () => {
     const time = getUnixTimeInSeconds()
 
     const task = {
-        ...taskData.value,
+        ...state,
         time: time
     }
 
     const requestAdd = addNewItemToTaskList(task)
 
     if (requestAdd) {
-        taskData.value.title = ''
+        state.title = ''
         return
     }
-    taskData.value.isInvalid = true
+    state.isInvalid = true
     // setTimeout(() => { taskData.value.isInvalid = false }, 1000)
 }
 
-const taskData = ref({
-    isInvalid: false,
-    title: ''
-})
+const setFieldValue = (key: string, value: string, keyErrorLength: number) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (state as any)[key] = value
+    state.isInvalid = keyErrorLength === 0
+}
 </script>
 
 <template>
     <div class="flex flex-col justify-center">
         <div class="mx-4 my-2">Create a new task</div>
         <div class="flex flex-row justify-between gap-4 items-center">
-            <n-input v-model:value="taskData.title" type="text" round placeholder="Add a new task" size="large" class="w-72"
-                :status="taskData.isInvalid ? 'error' : undefined" :class="taskData.isInvalid ? 'shake-y-short' : ''" />
-            <n-button :type="taskData.isInvalid ? 'error' : 'default'" circle class="h-9 w-9"
-                :color="taskData.isInvalid ? '' : ''" @click="addItemToTaskList">
-                <Icon :name="'material-symbols:add-circle-outline'" size="20px" />
-            </n-button>
+            <FormInputField :fieldKey="'title'" :fieldPlaceholder="'Add a new task'" :fieldType="'text'"
+                :prependIcon="'mdi:pen'" :appendIcon="'mdi:plus'" @fieldBlurred="setFieldValue"
+                @iconClicked="addItemToTaskList" />
         </div>
     </div>
 </template>

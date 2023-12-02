@@ -21,7 +21,7 @@ export const createNewUser = async (newUserData: any) => {
             errors.push(error)
         }
 
-        if (data !== null) {
+        if (data.user !== null) {
             store.setAuthState(data.user)
         }
     } catch (error) {
@@ -34,7 +34,7 @@ export const createNewUser = async (newUserData: any) => {
 export const loginUser = async (loginData) => {
     const supabase = useSupabaseClient()
     const store = useAuthStore()
-    const errors: Array<any> = []
+    const errors: Array<string> = []
 
     try {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -42,18 +42,36 @@ export const loginUser = async (loginData) => {
             password: loginData.password
         })
 
-        debugger
-
         if (error !== null) {
             errors.push(error)
         }
 
-        if (data !== null) {
+        if (data.user !== null) {
             store.setAuthState(data.user)
         }
     } catch (error) {
         errors.push(error)
     }
 
+    return errors
+}
+
+export const logoutUser = async (scope: any = undefined) => {
+    const supabase = useSupabaseClient()
+    const store = useAuthStore()
+    const errors: Array<string> = []
+    
+    try {
+        const { error } = await supabase.auth.signOut({ scope: scope })
+
+        if (error !== null) {
+            errors.push(error)
+        } else {
+            store.clearAuthState()
+        }
+    } catch (error) {
+        errors.push(error)
+    }
+    
     return errors
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const state = reactive({
-    errorMessages: [] as Array<any>,
+    errorMessages: [] as Array<string>,
     formData: {
         email: '',
         name: '',
@@ -16,12 +16,11 @@ const setFieldValue = (key: string, value: string, keyErrorLength: number) => {
     state.isFormValidated = keyErrorLength === 0
 }
 
-const handleLoginRequest = async () => {
-    debugger
+const handleRegisterRequest = async () => {
     if (!state.isFormValidated || state.isProcessing) return
 
     state.isProcessing = true
-
+    state.errorMessages = []
     const creationErrors = await createNewUser(state.formData)
 
     if (creationErrors.length === 0) {
@@ -41,6 +40,7 @@ const handleLoginRequest = async () => {
             :prependIcon="'mdi:mail'" @fieldBlurred="setFieldValue" />
         <FormInputField :fieldKey="'password'" :validationType="''" :fieldPlaceholder="'Passphrase'" :fieldType="'password'"
             @fieldBlurred="setFieldValue" />
-        <AppButton :buttonText="'Create an account'" :isLoading="state.isProcessing" @buttonPressed="handleLoginRequest" />
+        <AppButton :buttonText="'Create an account'" :isLoading="state.isProcessing"
+            @buttonPressed="handleRegisterRequest" />
     </FormContainer>
 </template>

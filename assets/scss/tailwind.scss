@@ -1,0 +1,20 @@
+// Tailwindcss Overrides and Customizations
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply m-0 p-0 bg-neutral-900;
+  }
+
+  .dark-palette {
+    @apply bg-neutral-800 text-neutral-300;
+  }
+
+  .light-palette {
+    @apply bg-white text-neutral-800;
+  }
+}

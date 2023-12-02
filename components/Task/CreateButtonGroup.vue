@@ -4,7 +4,7 @@ import { NButton, NButtonGroup } from 'naive-ui'
 const { isMobile } = useDevice()
 
 const handleUpdateTimerOption = (index: number) => {
-    console.log('hello', index)
+    // console.log('hello', index)
 }
 
 const taskOption = [

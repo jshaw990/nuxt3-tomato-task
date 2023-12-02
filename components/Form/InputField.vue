@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const emit = defineEmits(['fieldBlurred'])
+const emit = defineEmits(['fieldBlurred', 'iconClicked'])
 const props = defineProps({
     fieldKey: {
         type: String,
@@ -52,6 +52,10 @@ const handleFieldInputBlurred = (value: string) => {
     emit('fieldBlurred', props.fieldKey, value, state.errorMessages.length)
 }
 
+const handleIconClicked = () => {
+    emit('iconClicked', props.fieldKey, state.fieldData)
+}
+
 const inputType = computed(() => {
     if (props.fieldType.toLowerCase() !== 'password') {
         return props.fieldType
@@ -75,9 +79,13 @@ const inputType = computed(() => {
                 :disabled="props.isFieldDisabled" :placeholder="props.fieldPlaceholder" :type="inputType"
                 @blur="handleFieldInputBlurred($event.target.value)" />
             <template v-if="props.fieldType.toLowerCase() === 'password'">
-                <Icon :name="(state.isShowingPassword ? 'mdi:eye-off' : 'mdi:eye') || props.appendIcon" size="32px"
+                <Icon :name="(state.isShowingPassword ? 'mdi:eye-off' : 'mdi:eye')" size="32px"
                     class="cursor-pointer hover:text-tt-red-1"
                     @click="state.isShowingPassword = !state.isShowingPassword" />
+            </template>
+            <template v-else-if="props.appendIcon.length > 0">
+                <Icon :name="props.appendIcon" size="32px" class="cursor-pointer hover:text-tt-red-1"
+                    @click="handleIconClicked" />
             </template>
         </div>
         <template v-for="error in state.errorMessages" :key="error">

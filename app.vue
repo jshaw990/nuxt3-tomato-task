@@ -2,6 +2,9 @@
 import { useHead, useCookie } from 'nuxt/app'
 // import { useRuntimeConfig } from 'nuxt/app'
 import { computed } from 'vue'
+import { useAuthStore } from './store/authStore'
+
+const store = useAuthStore()
 
 // const { public: { currentEnv } } = useRuntimeConfig()
 

@@ -14,9 +14,7 @@ export default defineNuxtConfig({
             ]
         }
     },
-    css: [
-        '@/assets/styles.scss'
-    ],
+    css: ['@/assets/scss/main.scss'],
     modules: [
         '@nuxtjs/device',
         '@nuxtjs/eslint-module',
@@ -32,15 +30,19 @@ export default defineNuxtConfig({
     },
     supabase: {
         redirectOptions: {
-            login: '/login',
-            callback: '/confirm',
-            exclude: ['/', '/register']
+            login: '/authenticate',
+            callback: '/',
+            exclude: ['/', '/authenticate']
         }
     },
     runtimeConfig: {
         public: {
             currentEnv: process.env.NODE_ENV
         }
+    },
+    tailwindcss: {
+        cssPath: '@/assets/scss/tailwind.scss',
+        configPath: 'tailwind.config.ts'
     },
     eslint: {
         fix: true
