@@ -22,13 +22,32 @@ export const useAuthStore = defineStore('auth', () => {
     // GETTERS
     ////
 
-    const getUserIsAuth = computed(() => {
-        return false
+    const getMainUserData = computed(() => {
+        return {
+            name: authState.value.name,
+            email: authState.value.email,
+            phone: authState.value.phone
+        }
+    })
+    
+    const isUserAuth = computed(() => {
+        return authState.value.uuid.length > 0
     })
 
     ////
     // SETTERS
     ////
+
+    const clearAuthState = () => {
+        authState.value.uuid = ''
+        authState.value.email = ''
+        authState.value.phone = ''
+        authState.value.name = ''
+        authState.value.organizations = []
+        authState.value.lastLogin = ''
+        authState.value.isEmailVerified = false
+        authState.value.providers = []
+    }
 
     const setAuthState = (payload: unknown) => {
         authState.value.uuid = payload.id
@@ -42,8 +61,13 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     return {
-        getUserIsAuth,
+        // GETTERS
+        getMainUserData,
+        isUserAuth,
+        // SETTERS
+        clearAuthState,
         setAuthState,
+        // STATE
         authState
     }
 }, {
